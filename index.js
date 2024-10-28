@@ -1,25 +1,23 @@
-// function reverseStr(str){
-//     let input = String(str)
-//     let split = input.split('')
+function reverseStr(str){
+    let input = String(str);
+    let split = input.split('');
 
-//     let reverse  = split.reverse()
-//     let join = reverse.join('')
+    let reverse  = split.reverse();
+    let join = reverse.join('');
 
-//     return join
-// }
+    return join;
+}
 
-// function isPalindrome(str){
-//   let reversestring = reverseStr(str);
+function isPalindrome(str){
+  let reversestring = reverseStr(str);
 
-//     if(reversestring == str){
-//         return  true;
-//     }else{
-//         return false;
-//     }
+    if(reversestring == str){
+        return  true;
+    }else{
+        return false;
+    }
     
-// }
-
-// console.log(isPalindrome("23"))
+}
 
 
 function convertdateTostring(date){
@@ -44,16 +42,6 @@ function convertdateTostring(date){
 
 }
 
-
-const date = {
-    day: 6,
-    month: 1,
-    year: 2005,
-} 
-
-console.log(convertdateTostring(date));
-
-
 function getAllDateFormats(date){
  let dateStr =  convertdateTostring(date);
 
@@ -68,4 +56,32 @@ return [ddmmyyyy,mmddyyyy,yyyymmdd,ddmmyy,mmddyy,yymmdd];
 
 }
 
-console.log(getAllDateFormats(date))
+
+function checkPalindromeForAllDateFormats(date){
+
+  let listofDateformats = getAllDateFormats(date);
+  let flag = false
+
+  for(let i = 0; i < listofDateformats.length; i++){
+    if(isPalindrome(listofDateformats[i])){
+     flag = true;
+     break;
+    }
+  }
+
+  return flag;
+}
+
+const date = {
+  day: 2,
+  month: 11,
+  year: 2020,
+}
+
+console.log(convertdateTostring(date));
+
+console.log(getAllDateFormats(date));
+
+console.log(checkPalindromeForAllDateFormats(date));
+
+
