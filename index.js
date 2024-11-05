@@ -87,25 +87,29 @@ function checkPalindromeForAllDateFormats(date){
     }
   }
 
+  //gets next date
   function getNextDate(date){
-   let day = date.day + 1;
+   let day = date.day + 1; //increment the day
    let month = date.month;
    let year = date.year;
 
-   let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
-
-   if(month === 2){ //check for february
+   let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]; // 0 - 11
+   
+   //check for february
+   if(month === 2){ 
+    //check for leap year
     if(isLeapYear(year)){
       if(day > 29){
         day = 1;
-        month++;
+        month++; //increment the month
       }
     }else{
       if(day > 28){
         day = 1;
-        month++; 
+        month++; //increment the month
       }
     }
+    //check for other months
   }else{
     //check if the day exceeds the max days in month
     if(day > daysInMonth[month - 1]){
@@ -114,6 +118,7 @@ function checkPalindromeForAllDateFormats(date){
     }
   }
 
+    //increment the year if month is greater than 12
     if(month > 12){
      month = 1;
      year++;
@@ -124,9 +129,20 @@ function checkPalindromeForAllDateFormats(date){
   }
 
   function getNextPalindromeDate(date){
-   
+    let ctr = 0;
+    let nextDate  = getNextDate(date);
+
+    while(1){
+      ctr++;
+      let isPalindrome = checkPalindromeForAllDateFormats(nextDate);
+      if(isPalindrome){
+        break;
+      }
+      nextDate = getNextDate(nextDate);
+    }
+
+    return [ctr,nextDate];
   }
 
-  let date = {day: '30',month: '4',year: '2022'};
+  let date = {day: '15',month: '8',year: '2021'};
 
-console.log(getNextDate(date));
