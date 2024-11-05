@@ -69,10 +69,64 @@ function checkPalindromeForAllDateFormats(date){
         break;
       }
     }
-    
+
     return flag;
   };
 
-  let date = {day: '2',month: '11',year: '2020'};
+  function isLeapYear(year){
+    if(year % 400 == 0) {
+      return true;
+    }
+    if(year % 100 == 0){
+      return false;
+    }
+    if(year % 4 == 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
-  console.log(checkPalindromeForAllDateFormats(date))
+  function getNextDate(date){
+   let day = date.day + 1;
+   let month = date.month;
+   let year = date.year;
+
+   let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+   if(month === 2){ //check for february
+    if(isLeapYear(year)){
+      if(day > 29){
+        day = 1;
+        month++;
+      }
+    }else{
+      if(day > 28){
+        day = 1;
+        month++; 
+      }
+    }
+  }else{
+    //check if the day exceeds the max days in month
+    if(day > daysInMonth[month - 1]){
+      day = 1;
+      month++;
+    }
+  }
+
+    if(month > 12){
+     month = 1;
+     year++;
+    }
+
+    return {day:day, month:month, year:year};
+
+  }
+
+  function getNextPalindromeDate(date){
+   
+  }
+
+  let date = {day: '30',month: '4',year: '2022'};
+
+console.log(getNextDate(date));
