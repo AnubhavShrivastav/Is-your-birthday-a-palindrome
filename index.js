@@ -144,5 +144,36 @@ function checkPalindromeForAllDateFormats(date){
     return [ctr,nextDate];
   }
 
-  let date = {day: '15',month: '8',year: '2021'};
+  let dateInput = document.querySelector('#bday-input');
+  let showBtn = document.querySelector('#show-btn').addEventListener('click',clickHandler);
+  let result  = document.querySelector('#output')
+
+  function clickHandler(){
+    let bdayStr = dateInput.value;
+ 
+    if(bdayStr !== ''){
+      let listOfDate = bdayStr.split('-');
+ 
+      let date = {
+       day: Number(listOfDate[2]),
+       month: Number(listOfDate[1]),
+       year: Number(listOfDate[0])
+     };
+
+     let isPalindrome = checkPalindromeForAllDateFormats(date);
+ 
+      if(isPalindrome){
+        result.innerText = 'Yay! your birthday is a palindrome!! 🥳🥳'
+      }else{
+        let [ctr,nextDate] = getNextPalindromeDate(date);
+        result.innerText = `The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${ctr} days! 🙁`
+      }
+
+
+    }
+  }
+
+
+
+
 
